@@ -36,7 +36,7 @@ router.get("/books/:id", (req, res) => {
         else return res.json(data);
     }).catch(error => {
         errorResponse.errorMsg = error.message
-        res.status(500).send(errorResponse)
+        res.status(500).json(errorResponse)
     })
 }) 
 
@@ -68,7 +68,7 @@ router.post("/books", (req, res) => {
         })
     }).catch(error => {
         errorResponse.errorMsg = error.message
-        res.status(500).send(errorResponse)
+        res.status(500).json(errorResponse)
     })
 })
 
@@ -92,7 +92,6 @@ router.patch("/books/:id", async (req, res) => {
 
     if(Object.keys(payload).length !== 0){
         const book = await Book.findByPk(id)
-        console.log(book);
         if(book){
             Book.update({
                 title: payload.title ?? book.title,
