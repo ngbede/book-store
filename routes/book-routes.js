@@ -9,6 +9,14 @@ const errorResponse = {
     errorMsg: ""
 }
 
+router.get("/", (req, res) => {
+   return res.status(200).json({
+        message: "Thank you for checking out my book store api.",
+        repository: "https://github.com/ngbede/book-store",
+        statusCode: 200
+    })
+})
+
 // get all the books in the store
 router.get("/books", (req, res) => { 
     Book.findAll()
