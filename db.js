@@ -1,15 +1,18 @@
-const sqlDB = require('mysql2');
+const {Sequelize} = require("sequelize")
+require("dotenv").config()
 
-// password is part of env variable
-// on linux just do 'export password=your-sql-password'
-const dbPassword = process.env.dbPassword 
-
-const pool = sqlDB.createPool({
-    host: "localhost",
-    user: "root",
-    database: "book-store",
-    password: dbPassword
-}  
+// Amazon RDS credentials are stored in .env
+const sequelize = new Sequelize(
+    {
+        username: process.env.db_user,
+        password: process.env.db_password,
+        dialect: "mysql",
+        database: process.env.db,
+        host: process.env.db_host,
+        ssl: "Amazon RDS",
+        logging: console.log,
+        
+    }
 )
 
-module.exports = pool.promise() // return a promise
+module.exports = sequelize // return a promise
